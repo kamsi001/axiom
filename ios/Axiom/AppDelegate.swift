@@ -24,7 +24,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     window = UIWindow(frame: UIScreen.main.bounds)
 
     factory.startReactNative(
-      withModuleName: "MyNewApp",
+      withModuleName: "Axiom",
       in: window,
       launchOptions: launchOptions
     )
