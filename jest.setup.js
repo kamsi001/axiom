@@ -1,3 +1,5 @@
+/* eslint-env jest */
+
 const mockStorage = {};
 
 jest.mock('@react-native-async-storage/async-storage', () => ({
