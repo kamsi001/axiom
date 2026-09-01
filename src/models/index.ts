@@ -6,4 +6,5 @@ export type { ChallengeLevel } from './challengelevel';
 export type { GeneratorConfig, OperandConfig, QuestionType } from './generator';
 export type { Question, QuestionExplanation } from './question';
 export type { SessionResult, AnswerRecord } from './session';
+export type { StageProgress, LevelProgress } from './progress';
 
