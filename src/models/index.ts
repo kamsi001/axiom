@@ -9,4 +9,4 @@ export type { SessionResult, AnswerRecord } from './session';
 export type { StageProgress, LevelProgress } from './progress';
 export type { Cosmetic, UnlockCondition } from './cosmetic';
 export type { ContentBundle } from './contentbundle';
-
+export type { DiagnosticEntry } from './diagnostic';
