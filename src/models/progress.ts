@@ -3,7 +3,7 @@ export interface StageProgress {
   stageId: string;
   unlocked: boolean;
   completed: boolean;           // true only when the challenge level has been passed
-  challengeUnlocked: boolean;   // true when passingStarThreshold met across general levels
+  challengeUnlocked: boolean;   // true when passingStarThreshold met across regular levels
   challengePassed: boolean;     // true when player meets ChallengeLevel.passingAccuracy
   challengeAttempts: number;    // Total number of challenge attempts
   bestStars: number;            // Highest total stars across regular level attempts
@@ -15,5 +15,5 @@ export interface LevelProgress {
   bestStars: number;
   bestAccuracy: number;     // 0–1
   playCount: number;
-  lastPlayedAt: number;
+  lastPlayedAt: number;    // Unix ms
 }
