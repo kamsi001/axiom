@@ -1,0 +1,588 @@
+{
+  "$schema": "http://json-schema.org/draft-07/schema#",
+  "title": "ContentBundle",
+  "description": "Schema for the Axiom game content bundle (content.json). Contains all static game data: modes, stages, levels, challenge levels, and cosmetics.",
+  "type": "object",
+  "required": [
+    "contentVersion",
+    "schemaVersion",
+    "modes",
+    "stages",
+    "cosmetics"
+  ],
+  "additionalProperties": false,
+  "properties": {
+    "contentVersion": {
+      "description": "Incremented on every breaking schema change (renamed/removed IDs, added required fields, removed question types).",
+      "type": "integer",
+      "minimum": 0
+    },
+    "schemaVersion": {
+      "description": "Incremented on every breaking change to the save-data schema. Used to trigger migration functions on load.",
+      "type": "integer",
+      "minimum": 0
+    },
+    "modes": {
+      "description": "All subject-area modes, ordered from most foundational to most advanced.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Mode"
+      },
+      "minItems": 1
+    },
+    "stages": {
+      "description": "All curriculum stages across all modes.",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Stage"
+      },
+      "minItems": 1
+    },
+    "cosmetics": {
+      "description": "All unlockable cosmetic items (avatars, badges, themes, frames).",
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/Cosmetic"
+      }
+    }
+  },
+  "definitions": {
+    "Mode": {
+      "title": "Mode",
+      "description": "A top-level subject area. The first selection a student makes after profile setup.",
+      "type": "object",
+      "required": [
+        "id",
+        "title",
+        "description",
+        "order",
+        "stageIds"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "description": "Unique identifier (e.g. 'arithmetic', 'pre-algebra', 'algebra', 'linear-algebra').",
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "description": "Human-readable mode name shown on the Mode Select screen.",
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "description": "Brief summary shown on the Mode Select screen.",
+          "type": "string",
+          "minLength": 1
+        },
+        "order": {
+          "description": "Linear position across all modes (1 = most foundational). Must be unique across modes.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "stageIds": {
+          "description": "Ordered list of stage IDs belonging to this mode.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        }
+      }
+    },
+    "Stage": {
+      "title": "Stage",
+      "description": "A curriculum unit within a Mode. Contains regular levels and a challenge level.",
+      "type": "object",
+      "required": [
+        "id",
+        "modeId",
+        "title",
+        "description",
+        "order",
+        "prerequisiteStageIds",
+        "levels",
+        "challengeLevel",
+        "passingStarThreshold"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "description": "Unique identifier (e.g. 'pre-algebra-variables-01').",
+          "type": "string",
+          "minLength": 1
+        },
+        "modeId": {
+          "description": "ID of the Mode this stage belongs to.",
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "description": "Human-readable stage title.",
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "description": "Brief description of the stage topic.",
+          "type": "string",
+          "minLength": 1
+        },
+        "order": {
+          "description": "Sort order within the parent mode (not global). Must be unique within the mode.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "prerequisiteStageIds": {
+          "description": "IDs of stages within the same mode that must be completed (challenge passed) before this stage unlocks.",
+          "type": "array",
+          "items": {
+            "type": "string",
+            "minLength": 1
+          }
+        },
+        "levels": {
+          "description": "Ordered list of regular playable levels in this stage.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Level"
+          },
+          "minItems": 1
+        },
+        "challengeLevel": {
+          "description": "The final gate for this stage. Must be passed to unlock the next stage.",
+          "$ref": "#/definitions/ChallengeLevel"
+        },
+        "passingStarThreshold": {
+          "description": "Minimum total stars across all regular levels required to unlock the challenge level.",
+          "type": "integer",
+          "minimum": 0
+        }
+      }
+    },
+    "Level": {
+      "title": "Level",
+      "description": "A single playable unit within a stage. Configures the problem generator and scoring thresholds.",
+      "type": "object",
+      "required": [
+        "id",
+        "stageId",
+        "order",
+        "title",
+        "introduction",
+        "hintAllowance",
+        "questionCount",
+        "timeLimit",
+        "generatorConfig",
+        "starThresholds"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "description": "Unique identifier (e.g. 'pre-algebra-variables-01-lv1').",
+          "type": "string",
+          "minLength": 1
+        },
+        "stageId": {
+          "description": "ID of the stage this level belongs to.",
+          "type": "string",
+          "minLength": 1
+        },
+        "order": {
+          "description": "Position within the stage. Levels are presented in ascending order.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "title": {
+          "description": "Human-readable level title.",
+          "type": "string",
+          "minLength": 1
+        },
+        "introduction": {
+          "description": "Optional introductory content shown before the first question. null = no intro screen.",
+          "oneOf": [
+            {
+              "$ref": "#/definitions/LevelIntroduction"
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "hintAllowance": {
+          "description": "Maximum number of hints available per session. 0 = hints disabled.",
+          "type": "integer",
+          "minimum": 0
+        },
+        "questionCount": {
+          "description": "Number of questions generated per play session.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "timeLimit": {
+          "description": "Time limit in seconds for the session. null = untimed.",
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "generatorConfig": {
+          "description": "Configuration for the problem generation engine for this level.",
+          "$ref": "#/definitions/GeneratorConfig"
+        },
+        "starThresholds": {
+          "description": "Accuracy thresholds (as percentages 0-100) required to earn 1, 2, or 3 stars.",
+          "$ref": "#/definitions/StarThresholds"
+        }
+      }
+    },
+    "LevelIntroduction": {
+      "title": "LevelIntroduction",
+      "description": "Optional introductory content shown to the student before the first question of a level.",
+      "type": "object",
+      "required": [
+        "body"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "body": {
+          "description": "Brief plain-text explanation of what this level covers.",
+          "type": "string",
+          "minLength": 1
+        },
+        "examplePrompt": {
+          "description": "An optional worked example problem shown alongside the body. Should differ from generated questions.",
+          "type": "string",
+          "minLength": 1
+        },
+        "exampleSolution": {
+          "description": "Step-by-step solution for the worked example in examplePrompt.",
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "StarThresholds": {
+      "title": "StarThresholds",
+      "description": "Accuracy percentage thresholds (0-100) required to earn each star rating.",
+      "type": "object",
+      "required": [
+        "oneStar",
+        "twoStar",
+        "threeStar"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "oneStar": {
+          "description": "Minimum accuracy percentage to earn 1 star.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "twoStar": {
+          "description": "Minimum accuracy percentage to earn 2 stars.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "threeStar": {
+          "description": "Minimum accuracy percentage to earn 3 stars (speed bonus may apply).",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 100
+        }
+      }
+    },
+    "ChallengeLevel": {
+      "title": "ChallengeLevel",
+      "description": "A pass/fail assessment at the end of every stage. Must be passed to unlock the next stage. Does not award stars or XP.",
+      "type": "object",
+      "required": [
+        "id",
+        "stageId",
+        "title",
+        "questionCount",
+        "timeLimit",
+        "passingAccuracy",
+        "retryAllowed",
+        "generatorConfigs",
+        "difficultyWeights"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "description": "Unique identifier (e.g. 'pre-algebra-variables-01-challenge').",
+          "type": "string",
+          "minLength": 1
+        },
+        "stageId": {
+          "description": "ID of the stage this challenge level belongs to.",
+          "type": "string",
+          "minLength": 1
+        },
+        "title": {
+          "description": "Human-readable title for the challenge (e.g. 'Stage Challenge').",
+          "type": "string",
+          "minLength": 1
+        },
+        "questionCount": {
+          "description": "Number of questions in the challenge session. Typically 15-20.",
+          "type": "integer",
+          "minimum": 1
+        },
+        "timeLimit": {
+          "description": "Time limit in seconds for the challenge session. null = untimed.",
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 1
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "passingAccuracy": {
+          "description": "Accuracy fraction (0-1) the player must meet or exceed to pass the challenge.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "retryAllowed": {
+          "description": "Whether the player may reattempt the challenge after failing.",
+          "type": "boolean"
+        },
+        "generatorConfigs": {
+          "description": "One GeneratorConfig per question type covered in the stage. The challenge samples across all of them to ensure full topic coverage.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GeneratorConfig"
+          },
+          "minItems": 1
+        },
+        "difficultyWeights": {
+          "description": "Weighted distribution of question difficulty for the challenge. easy + medium + hard should sum to 1.0.",
+          "$ref": "#/definitions/DifficultyWeights"
+        }
+      }
+    },
+    "DifficultyWeights": {
+      "title": "DifficultyWeights",
+      "description": "Proportions of questions at each difficulty tier. easy + medium + hard should sum to 1.0. Default: { easy: 0.2, medium: 0.3, hard: 0.5 }.",
+      "type": "object",
+      "required": [
+        "easy",
+        "medium",
+        "hard"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "easy": {
+          "description": "Proportion of questions at difficulty 1-4.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "medium": {
+          "description": "Proportion of questions at difficulty 5-7.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        },
+        "hard": {
+          "description": "Proportion of questions at difficulty 8-10.",
+          "type": "number",
+          "minimum": 0,
+          "maximum": 1
+        }
+      }
+    },
+    "GeneratorConfig": {
+      "title": "GeneratorConfig",
+      "description": "Tells the problem generation engine what kinds of questions to produce for a level or challenge.",
+      "type": "object",
+      "required": [
+        "questionTypes",
+        "operands",
+        "allowNegatives",
+        "allowFractions",
+        "allowDecimals",
+        "variableCount",
+        "difficultyRange"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "questionTypes": {
+          "description": "Which interaction types are eligible for question generation. Must contain at least one entry.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/QuestionType"
+          },
+          "minItems": 1
+        },
+        "operands": {
+          "description": "Numeric bounds for operand generation.",
+          "$ref": "#/definitions/OperandConfig"
+        },
+        "allowNegatives": {
+          "description": "Whether the generator may produce negative operands or answers.",
+          "type": "boolean"
+        },
+        "allowFractions": {
+          "description": "Whether the generator may produce fractional operands or answers.",
+          "type": "boolean"
+        },
+        "allowDecimals": {
+          "description": "Whether the generator may produce decimal operands or answers.",
+          "type": "boolean"
+        },
+        "variableCount": {
+          "description": "Number of algebraic variables to introduce. null = no variables (pure arithmetic).",
+          "oneOf": [
+            {
+              "type": "integer",
+              "minimum": 0
+            },
+            {
+              "type": "null"
+            }
+          ]
+        },
+        "difficultyRange": {
+          "description": "Inclusive [min, max] difficulty bounds on the 1-10 scale. The generator picks uniformly within this range.",
+          "type": "array",
+          "items": {
+            "type": "integer",
+            "minimum": 1,
+            "maximum": 10
+          },
+          "minItems": 2,
+          "maxItems": 2
+        }
+      }
+    },
+    "OperandConfig": {
+      "title": "OperandConfig",
+      "description": "Numeric bounds applied to operand generation. The generator constrains all operands to [min, max].",
+      "type": "object",
+      "required": [
+        "min",
+        "max"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "min": {
+          "description": "Minimum operand value (inclusive).",
+          "type": "number"
+        },
+        "max": {
+          "description": "Maximum operand value (inclusive).",
+          "type": "number"
+        }
+      }
+    },
+    "QuestionType": {
+      "title": "QuestionType",
+      "description": "The interaction type of a generated question.",
+      "type": "string",
+      "enum": [
+        "multiple-choice",
+        "numeric-input",
+        "drag-and-drop",
+        "tile-selection",
+        "equation-balance",
+        "fill-in-the-blank",
+        "order-operations"
+      ]
+    },
+    "Cosmetic": {
+      "title": "Cosmetic",
+      "description": "An unlockable reward item (avatar, badge, theme, or frame).",
+      "type": "object",
+      "required": [
+        "id",
+        "type",
+        "name",
+        "description",
+        "unlockCondition",
+        "assetRef"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the cosmetic.",
+          "type": "string",
+          "minLength": 1
+        },
+        "type": {
+          "description": "Visual category of the cosmetic.",
+          "type": "string",
+          "enum": [
+            "avatar",
+            "badge",
+            "theme",
+            "frame"
+          ]
+        },
+        "name": {
+          "description": "Human-readable name shown in the cosmetics gallery.",
+          "type": "string",
+          "minLength": 1
+        },
+        "description": {
+          "description": "Short description of the cosmetic item.",
+          "type": "string",
+          "minLength": 1
+        },
+        "unlockCondition": {
+          "description": "Condition that must be satisfied for this cosmetic to be awarded to the player.",
+          "$ref": "#/definitions/UnlockCondition"
+        },
+        "assetRef": {
+          "description": "Path or key for the visual asset (image, theme token, etc.).",
+          "type": "string",
+          "minLength": 1
+        }
+      }
+    },
+    "UnlockCondition": {
+      "title": "UnlockCondition",
+      "description": "Describes what the player must achieve to unlock a cosmetic.",
+      "type": "object",
+      "required": [
+        "type",
+        "value"
+      ],
+      "additionalProperties": false,
+      "properties": {
+        "type": {
+          "description": "The kind of achievement that triggers the unlock.",
+          "type": "string",
+          "enum": [
+            "xp-threshold",
+            "stage-complete",
+            "streak",
+            "perfect-level"
+          ]
+        },
+        "value": {
+          "description": "The threshold or identifier for the condition. e.g. 500 for an XP threshold, or a stageId string for stage-complete.",
+          "oneOf": [
+            {
+              "type": "number",
+              "minimum": 0
+            },
+            {
+              "type": "string",
+              "minLength": 1
+            }
+          ]
+        }
+      }
+    }
+  }
+}
