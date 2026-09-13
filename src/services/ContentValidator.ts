@@ -610,7 +610,11 @@ function validateChallengeLevel(
     if (weightValid) {
       const sum =
         (dw.easy as number) + (dw.medium as number) + (dw.hard as number);
-      if (Math.abs(sum - 1.0) > 0.001) {
+      // Use 0.0011 threshold (not 0.001) to tolerate IEEE 754 drift at the
+      // boundary — e.g. 0.333+0.333+0.333 = 0.9990000000000001 and
+      // 0.334+0.334+0.333 = 1.0010000000000001, both of which are within ±0.001
+      // of 1.0 but exceed the exact float 0.001 by a hair.
+      if (Math.abs(sum - 1.0) > 0.0011) {
         err(
           errors,
           `${path}.difficultyWeights`,
