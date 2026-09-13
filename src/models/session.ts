@@ -1,17 +1,17 @@
 export interface SessionResult {
-  id: string;               
+  id: string;
   playerId: string;
   levelId: string;
   stageId: string;
-  modeId: string;           
-  completedAt: number;      
+  modeId: string;
+  completedAt: number;
   durationSeconds: number;
   questionsTotal: number;
   questionsCorrect: number;
-  accuracy: number;         // 0–1 float
-  starsEarned: 0 | 1 | 2 | 3;     
+  accuracy: number; // 0–1 float
+  starsEarned: 0 | 1 | 2 | 3;
   xpEarned: number;
-  hintsUsed: number;        // Total hints consumed in the session
+  hintsUsed: number; // Total hints consumed in the session
   answers: AnswerRecord[];
 }
 
@@ -20,6 +20,6 @@ export interface AnswerRecord {
   submittedAnswer: string | number;
   correct: boolean;
   timeSpentSeconds: number;
-  hintUsed: boolean;                          // Whether the hint was revealed before answering
-  feedbackTierShown: 1 | 2 | 3 | null;       // Feedback tier shown after answer; null = correct
+  hintUsed: boolean; // Whether the hint was revealed before answering
+  feedbackTierShown: 1 | 2 | 3 | null; // Feedback tier shown after answer; null = correct
 }

@@ -51,13 +51,7 @@
       "title": "Mode",
       "description": "A top-level subject area. The first selection a student makes after profile setup.",
       "type": "object",
-      "required": [
-        "id",
-        "title",
-        "description",
-        "order",
-        "stageIds"
-      ],
+      "required": ["id", "title", "description", "order", "stageIds"],
       "additionalProperties": false,
       "properties": {
         "id": {
@@ -244,9 +238,7 @@
       "title": "LevelIntroduction",
       "description": "Optional introductory content shown to the student before the first question of a level.",
       "type": "object",
-      "required": [
-        "body"
-      ],
+      "required": ["body"],
       "additionalProperties": false,
       "properties": {
         "body": {
@@ -270,11 +262,7 @@
       "title": "StarThresholds",
       "description": "Accuracy percentage thresholds (0-100) required to earn each star rating.",
       "type": "object",
-      "required": [
-        "oneStar",
-        "twoStar",
-        "threeStar"
-      ],
+      "required": ["oneStar", "twoStar", "threeStar"],
       "additionalProperties": false,
       "properties": {
         "oneStar": {
@@ -374,11 +362,7 @@
       "title": "DifficultyWeights",
       "description": "Proportions of questions at each difficulty tier. easy + medium + hard should sum to 1.0. Default: { easy: 0.2, medium: 0.3, hard: 0.5 }.",
       "type": "object",
-      "required": [
-        "easy",
-        "medium",
-        "hard"
-      ],
+      "required": ["easy", "medium", "hard"],
       "additionalProperties": false,
       "properties": {
         "easy": {
@@ -469,10 +453,7 @@
       "title": "OperandConfig",
       "description": "Numeric bounds applied to operand generation. The generator constrains all operands to [min, max].",
       "type": "object",
-      "required": [
-        "min",
-        "max"
-      ],
+      "required": ["min", "max"],
       "additionalProperties": false,
       "properties": {
         "min": {
@@ -521,12 +502,7 @@
         "type": {
           "description": "Visual category of the cosmetic.",
           "type": "string",
-          "enum": [
-            "avatar",
-            "badge",
-            "theme",
-            "frame"
-          ]
+          "enum": ["avatar", "badge", "theme", "frame"]
         },
         "name": {
           "description": "Human-readable name shown in the cosmetics gallery.",
@@ -553,21 +529,13 @@
       "title": "UnlockCondition",
       "description": "Describes what the player must achieve to unlock a cosmetic.",
       "type": "object",
-      "required": [
-        "type",
-        "value"
-      ],
+      "required": ["type", "value"],
       "additionalProperties": false,
       "properties": {
         "type": {
           "description": "The kind of achievement that triggers the unlock.",
           "type": "string",
-          "enum": [
-            "xp-threshold",
-            "stage-complete",
-            "streak",
-            "perfect-level"
-          ]
+          "enum": ["xp-threshold", "stage-complete", "streak", "perfect-level"]
         },
         "value": {
           "description": "The threshold or identifier for the condition. e.g. 500 for an XP threshold, or a stageId string for stage-complete.",

@@ -9,9 +9,11 @@ describe('seed content.json', () => {
     const result = validateContentBundle(bundle);
     if (!result.valid) {
       const summary = result.errors
-        .map((e) => `  ${e.path} — ${e.message}`)
+        .map(e => `  ${e.path} — ${e.message}`)
         .join('\n');
-      throw new Error(`content.json has ${result.errors.length} error(s):\n${summary}`);
+      throw new Error(
+        `content.json has ${result.errors.length} error(s):\n${summary}`,
+      );
     }
     expect(result.valid).toBe(true);
     expect(result.errors).toHaveLength(0);

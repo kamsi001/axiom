@@ -11,7 +11,6 @@
  * ContentValidator, not by this schema.
  */
 
- 
 const contentSchema: object = require('./content.schema.json') as object;
 
 export { contentSchema };

@@ -52,7 +52,10 @@ function makeValidChallengeLevel(): Record<string, unknown> {
   };
 }
 
-function makeValidStage(id = 'stage-1', modeId = 'mode-1'): Record<string, unknown> {
+function makeValidStage(
+  id = 'stage-1',
+  modeId = 'mode-1',
+): Record<string, unknown> {
   return {
     id,
     modeId,
@@ -234,7 +237,7 @@ describe('Top-level bundle failures', () => {
     delete (bundle as any).contentVersion;
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'contentVersion')).toBe(true);
+    expect(result.errors.some(e => e.field === 'contentVersion')).toBe(true);
   });
 
   it('missing schemaVersion fails', () => {
@@ -242,7 +245,7 @@ describe('Top-level bundle failures', () => {
     delete (bundle as any).schemaVersion;
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'schemaVersion')).toBe(true);
+    expect(result.errors.some(e => e.field === 'schemaVersion')).toBe(true);
   });
 
   it('missing modes array fails', () => {
@@ -250,7 +253,7 @@ describe('Top-level bundle failures', () => {
     delete (bundle as any).modes;
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'modes')).toBe(true);
+    expect(result.errors.some(e => e.field === 'modes')).toBe(true);
   });
 
   it('missing stages array fails', () => {
@@ -258,7 +261,7 @@ describe('Top-level bundle failures', () => {
     delete (bundle as any).stages;
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'stages')).toBe(true);
+    expect(result.errors.some(e => e.field === 'stages')).toBe(true);
   });
 
   it('empty modes array fails', () => {
@@ -266,7 +269,7 @@ describe('Top-level bundle failures', () => {
     bundle.modes = [];
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'modes')).toBe(true);
+    expect(result.errors.some(e => e.field === 'modes')).toBe(true);
   });
 
   it('empty stages array fails', () => {
@@ -274,7 +277,7 @@ describe('Top-level bundle failures', () => {
     bundle.stages = [];
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'stages')).toBe(true);
+    expect(result.errors.some(e => e.field === 'stages')).toBe(true);
   });
 });
 
@@ -288,7 +291,7 @@ describe('Mode validation failures', () => {
     delete (bundle.modes as any[])[0].id;
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'id')).toBe(true);
+    expect(result.errors.some(e => e.field === 'id')).toBe(true);
   });
 
   it('mode missing title fails', () => {
@@ -296,7 +299,7 @@ describe('Mode validation failures', () => {
     delete (bundle.modes as any[])[0].title;
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'title')).toBe(true);
+    expect(result.errors.some(e => e.field === 'title')).toBe(true);
   });
 
   it('mode missing description fails', () => {
@@ -304,7 +307,7 @@ describe('Mode validation failures', () => {
     delete (bundle.modes as any[])[0].description;
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'description')).toBe(true);
+    expect(result.errors.some(e => e.field === 'description')).toBe(true);
   });
 
   it('mode with non-integer order fails', () => {
@@ -312,7 +315,7 @@ describe('Mode validation failures', () => {
     (bundle.modes as any[])[0].order = 1.5;
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'order')).toBe(true);
+    expect(result.errors.some(e => e.field === 'order')).toBe(true);
   });
 });
 
@@ -326,7 +329,7 @@ describe('Stage validation failures', () => {
     delete (bundle.stages as any[])[0].id;
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'id')).toBe(true);
+    expect(result.errors.some(e => e.field === 'id')).toBe(true);
   });
 
   it('stage missing title fails', () => {
@@ -334,7 +337,7 @@ describe('Stage validation failures', () => {
     delete (bundle.stages as any[])[0].title;
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'title')).toBe(true);
+    expect(result.errors.some(e => e.field === 'title')).toBe(true);
   });
 
   it('stage missing description fails', () => {
@@ -342,7 +345,7 @@ describe('Stage validation failures', () => {
     delete (bundle.stages as any[])[0].description;
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'description')).toBe(true);
+    expect(result.errors.some(e => e.field === 'description')).toBe(true);
   });
 
   it('stage missing challengeLevel fails', () => {
@@ -350,7 +353,7 @@ describe('Stage validation failures', () => {
     delete (bundle.stages as any[])[0].challengeLevel;
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'challengeLevel')).toBe(true);
+    expect(result.errors.some(e => e.field === 'challengeLevel')).toBe(true);
   });
 
   it('stage with empty levels array fails', () => {
@@ -358,7 +361,7 @@ describe('Stage validation failures', () => {
     (bundle.stages as any[])[0].levels = [];
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'levels')).toBe(true);
+    expect(result.errors.some(e => e.field === 'levels')).toBe(true);
   });
 
   it('stage with order = 0 fails (must be >= 1)', () => {
@@ -366,7 +369,7 @@ describe('Stage validation failures', () => {
     (bundle.stages as any[])[0].order = 0;
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'order')).toBe(true);
+    expect(result.errors.some(e => e.field === 'order')).toBe(true);
   });
 });
 
@@ -380,7 +383,7 @@ describe('Level validation failures', () => {
     delete (bundle.stages as any[])[0].levels[0].id;
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'id')).toBe(true);
+    expect(result.errors.some(e => e.field === 'id')).toBe(true);
   });
 
   it('level missing title fails', () => {
@@ -388,7 +391,7 @@ describe('Level validation failures', () => {
     delete (bundle.stages as any[])[0].levels[0].title;
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'title')).toBe(true);
+    expect(result.errors.some(e => e.field === 'title')).toBe(true);
   });
 
   it('level with non-integer order fails', () => {
@@ -396,7 +399,7 @@ describe('Level validation failures', () => {
     (bundle.stages as any[])[0].levels[0].order = 'first';
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'order')).toBe(true);
+    expect(result.errors.some(e => e.field === 'order')).toBe(true);
   });
 
   it('level with questionCount = 0 fails (must be >= 1)', () => {
@@ -404,7 +407,7 @@ describe('Level validation failures', () => {
     (bundle.stages as any[])[0].levels[0].questionCount = 0;
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'questionCount')).toBe(true);
+    expect(result.errors.some(e => e.field === 'questionCount')).toBe(true);
   });
 
   it('two levels in the same stage with duplicate order values fail (rule 5)', () => {
@@ -414,7 +417,7 @@ describe('Level validation failures', () => {
     (bundle.stages as any[])[0].levels[1].order = 1;
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'order')).toBe(true);
+    expect(result.errors.some(e => e.field === 'order')).toBe(true);
   });
 });
 
@@ -428,7 +431,7 @@ describe('ChallengeLevel validation failures', () => {
     (bundle.stages as any[])[0].challengeLevel.passingAccuracy = -0.01;
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'passingAccuracy')).toBe(true);
+    expect(result.errors.some(e => e.field === 'passingAccuracy')).toBe(true);
   });
 
   it('passingAccuracy = 1.01 fails (rule 6)', () => {
@@ -436,7 +439,7 @@ describe('ChallengeLevel validation failures', () => {
     (bundle.stages as any[])[0].challengeLevel.passingAccuracy = 1.01;
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'passingAccuracy')).toBe(true);
+    expect(result.errors.some(e => e.field === 'passingAccuracy')).toBe(true);
   });
 
   it('difficultyWeights summing to 0.9 fails (rule 7)', () => {
@@ -448,7 +451,7 @@ describe('ChallengeLevel validation failures', () => {
     };
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'difficultyWeights')).toBe(true);
+    expect(result.errors.some(e => e.field === 'difficultyWeights')).toBe(true);
   });
 
   it('difficultyWeights summing to 1.1 fails (rule 7)', () => {
@@ -460,7 +463,7 @@ describe('ChallengeLevel validation failures', () => {
     };
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'difficultyWeights')).toBe(true);
+    expect(result.errors.some(e => e.field === 'difficultyWeights')).toBe(true);
   });
 
   it('generatorConfigs is empty array fails', () => {
@@ -468,7 +471,7 @@ describe('ChallengeLevel validation failures', () => {
     (bundle.stages as any[])[0].challengeLevel.generatorConfigs = [];
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'generatorConfigs')).toBe(true);
+    expect(result.errors.some(e => e.field === 'generatorConfigs')).toBe(true);
   });
 });
 
@@ -479,10 +482,12 @@ describe('ChallengeLevel validation failures', () => {
 describe('GeneratorConfig validation failures', () => {
   it('difficultyRange[0] > difficultyRange[1] fails (rule 8) — e.g., [7, 3]', () => {
     const bundle = makeValidBundle();
-    (bundle.stages as any[])[0].levels[0].generatorConfig.difficultyRange = [7, 3];
+    (bundle.stages as any[])[0].levels[0].generatorConfig.difficultyRange = [
+      7, 3,
+    ];
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'difficultyRange')).toBe(true);
+    expect(result.errors.some(e => e.field === 'difficultyRange')).toBe(true);
   });
 
   it('difficultyRange with only 1 element fails', () => {
@@ -490,7 +495,7 @@ describe('GeneratorConfig validation failures', () => {
     (bundle.stages as any[])[0].levels[0].generatorConfig.difficultyRange = [3];
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'difficultyRange')).toBe(true);
+    expect(result.errors.some(e => e.field === 'difficultyRange')).toBe(true);
   });
 
   it('questionTypes empty array fails', () => {
@@ -498,23 +503,26 @@ describe('GeneratorConfig validation failures', () => {
     (bundle.stages as any[])[0].levels[0].generatorConfig.questionTypes = [];
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'questionTypes')).toBe(true);
+    expect(result.errors.some(e => e.field === 'questionTypes')).toBe(true);
   });
 
   it('unknown QuestionType string fails', () => {
     const bundle = makeValidBundle();
-    (bundle.stages as any[])[0].levels[0].generatorConfig.questionTypes = ['not-a-real-type'];
+    (bundle.stages as any[])[0].levels[0].generatorConfig.questionTypes = [
+      'not-a-real-type',
+    ];
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'questionTypes')).toBe(true);
+    expect(result.errors.some(e => e.field === 'questionTypes')).toBe(true);
   });
 
   it('allowNegatives not boolean fails', () => {
     const bundle = makeValidBundle();
-    (bundle.stages as any[])[0].levels[0].generatorConfig.allowNegatives = 'yes';
+    (bundle.stages as any[])[0].levels[0].generatorConfig.allowNegatives =
+      'yes';
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'allowNegatives')).toBe(true);
+    expect(result.errors.some(e => e.field === 'allowNegatives')).toBe(true);
   });
 });
 
@@ -528,7 +536,7 @@ describe('Cross-field validation failures', () => {
     (bundle.stages as any[])[0].modeId = 'nonexistent-mode';
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'modeId')).toBe(true);
+    expect(result.errors.some(e => e.field === 'modeId')).toBe(true);
   });
 
   it('stage with prerequisiteStageIds referencing a non-existent stage fails (rule 3)', () => {
@@ -536,7 +544,9 @@ describe('Cross-field validation failures', () => {
     (bundle.stages as any[])[0].prerequisiteStageIds = ['does-not-exist'];
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'prerequisiteStageIds')).toBe(true);
+    expect(result.errors.some(e => e.field === 'prerequisiteStageIds')).toBe(
+      true,
+    );
   });
 
   it('stage with prerequisiteStageIds referencing a stage from a different mode fails (rule 3)', () => {
@@ -557,7 +567,9 @@ describe('Cross-field validation failures', () => {
 
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'prerequisiteStageIds')).toBe(true);
+    expect(result.errors.some(e => e.field === 'prerequisiteStageIds')).toBe(
+      true,
+    );
   });
 
   it('circular prerequisites: A → B, B → A both appear in errors (rule 4)', () => {
@@ -583,9 +595,11 @@ describe('Cross-field validation failures', () => {
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
     // Both stage-a and stage-b should appear in cycle errors
-    const cycleErrors = result.errors.filter((e) => e.field === 'prerequisiteStageIds');
+    const cycleErrors = result.errors.filter(
+      e => e.field === 'prerequisiteStageIds',
+    );
     expect(cycleErrors.length).toBeGreaterThanOrEqual(2);
-    const errorText = cycleErrors.map((e) => e.message).join(' ');
+    const errorText = cycleErrors.map(e => e.message).join(' ');
     expect(errorText).toContain('stage-a');
     expect(errorText).toContain('stage-b');
   });
@@ -593,7 +607,10 @@ describe('Cross-field validation failures', () => {
   it('three-stage cycle A → B → C → A all appear in errors (rule 4)', () => {
     const bundle = makeValidBundle();
 
-    const makeStage = (id: string, prereqId: string): Record<string, unknown> => {
+    const makeStage = (
+      id: string,
+      prereqId: string,
+    ): Record<string, unknown> => {
       const s = makeValidStage(id, 'mode-1');
       (s as any).prerequisiteStageIds = [prereqId];
       (s.levels as any[])[0].stageId = id;
@@ -616,9 +633,11 @@ describe('Cross-field validation failures', () => {
 
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    const cycleErrors = result.errors.filter((e) => e.field === 'prerequisiteStageIds');
+    const cycleErrors = result.errors.filter(
+      e => e.field === 'prerequisiteStageIds',
+    );
     expect(cycleErrors.length).toBeGreaterThanOrEqual(3);
-    const errorText = cycleErrors.map((e) => e.message).join(' ');
+    const errorText = cycleErrors.map(e => e.message).join(' ');
     expect(errorText).toContain('stage-a');
     expect(errorText).toContain('stage-b');
     expect(errorText).toContain('stage-c');
@@ -627,14 +646,18 @@ describe('Cross-field validation failures', () => {
   it('ChallengeLevel generatorConfigs missing a QuestionType used in a level fails (rule 9)', () => {
     const bundle = makeValidBundle();
     // Level uses 'numeric-input', but challenge only covers 'multiple-choice'
-    (bundle.stages as any[])[0].levels[0].generatorConfig.questionTypes = ['numeric-input'];
+    (bundle.stages as any[])[0].levels[0].generatorConfig.questionTypes = [
+      'numeric-input',
+    ];
     (bundle.stages as any[])[0].challengeLevel.generatorConfigs = [
       makeValidGeneratorConfig(), // covers only 'multiple-choice'
     ];
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
-    expect(result.errors.some((e) => e.field === 'generatorConfigs')).toBe(true);
-    const coverageError = result.errors.find((e) => e.field === 'generatorConfigs');
+    expect(result.errors.some(e => e.field === 'generatorConfigs')).toBe(true);
+    const coverageError = result.errors.find(
+      e => e.field === 'generatorConfigs',
+    );
     expect(coverageError?.message).toContain('numeric-input');
   });
 });
@@ -672,16 +695,16 @@ describe('Error message quality', () => {
   it('validator collects ALL errors before returning (not short-circuit on first error)', () => {
     // Introduce multiple independent errors across different fields
     const bundle = makeValidBundle();
-    delete (bundle as any).contentVersion;          // error 1
-    delete (bundle as any).schemaVersion;           // error 2
-    (bundle.stages as any[])[0].order = 0;          // error 3
+    delete (bundle as any).contentVersion; // error 1
+    delete (bundle as any).schemaVersion; // error 2
+    (bundle.stages as any[])[0].order = 0; // error 3
     (bundle.stages as any[])[0].challengeLevel.passingAccuracy = 2; // error 4
 
     const result = validateContentBundle(bundle);
     expect(result.valid).toBe(false);
     expect(result.errors.length).toBeGreaterThanOrEqual(4);
 
-    const fields = result.errors.map((e) => e.field);
+    const fields = result.errors.map(e => e.field);
     expect(fields).toContain('contentVersion');
     expect(fields).toContain('schemaVersion');
     expect(fields).toContain('order');

@@ -6,11 +6,14 @@ describe('Mobile Storage Shim Environment', () => {
   });
 
   it('should successfully store and retrieve a data entry', async () => {
-    await AsyncStorage.setItem('user_session', JSON.stringify({ name: 'Kiro' }));
-    
+    await AsyncStorage.setItem(
+      'user_session',
+      JSON.stringify({ name: 'Kiro' }),
+    );
+
     const sessionData = await AsyncStorage.getItem('user_session');
     const parsed = JSON.parse(sessionData || '{}');
-    
+
     expect(parsed.name).toBe('Kiro');
   });
 

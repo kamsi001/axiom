@@ -8,7 +8,6 @@ export interface PlayerSettings {
   textSize: 'small' | 'medium' | 'large';
 }
 
-
 /**
  * The local guest profile created on first launch.
  * All progress, settings, and cosmetics are scoped to this single profile.

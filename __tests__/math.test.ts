@@ -9,16 +9,16 @@ describe('Math Operations - Property Based Testing', () => {
     fc.assert(
       fc.property(fc.integer(), fc.integer(), (a, b) => {
         expect(add(a, b)).toBe(add(b, a));
-      })
+      }),
     );
   });
 
   it('should always result in a string length greater than or equal to original when formatting', () => {
     fc.assert(
-      fc.property(fc.string(), (text) => {
+      fc.property(fc.string(), text => {
         const formatted = text.trim().toUpperCase();
         expect(formatted.length).toBeLessThanOrEqual(text.length);
-      })
+      }),
     );
   });
 });

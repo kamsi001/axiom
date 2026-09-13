@@ -303,7 +303,14 @@ function validateGeneratorConfig(
   errors: ValidationError[],
 ): void {
   if (!isObject(config)) {
-    err(errors, path, path.split('.').pop() ?? path, 'GeneratorConfig must be an object', 'object', config);
+    err(
+      errors,
+      path,
+      path.split('.').pop() ?? path,
+      'GeneratorConfig must be an object',
+      'object',
+      config,
+    );
     return;
   }
 
@@ -385,7 +392,11 @@ function validateGeneratorConfig(
       );
     }
     // sub-task 8: min <= max
-    if (isInteger(dMin) && isInteger(dMax) && (dMin as number) > (dMax as number)) {
+    if (
+      isInteger(dMin) &&
+      isInteger(dMax) &&
+      (dMin as number) > (dMax as number)
+    ) {
       err(
         errors,
         `${path}.difficultyRange`,
@@ -408,7 +419,14 @@ function validateStarThresholds(
   errors: ValidationError[],
 ): void {
   if (!isObject(thresholds)) {
-    err(errors, path, 'starThresholds', 'starThresholds must be an object', 'object', thresholds);
+    err(
+      errors,
+      path,
+      'starThresholds',
+      'starThresholds must be an object',
+      'object',
+      thresholds,
+    );
     return;
   }
   for (const field of ['oneStar', 'twoStar', 'threeStar'] as const) {
@@ -436,7 +454,14 @@ function validateLevelIntroduction(
   errors: ValidationError[],
 ): void {
   if (!isObject(intro)) {
-    err(errors, path, 'introduction', 'introduction must be an object or null', 'object or null', intro);
+    err(
+      errors,
+      path,
+      'introduction',
+      'introduction must be an object or null',
+      'object or null',
+      intro,
+    );
     return;
   }
   requireString(errors, intro, 'body', path);
@@ -477,7 +502,14 @@ function validateLevel(
   errors: ValidationError[],
 ): void {
   if (!isObject(level)) {
-    err(errors, path, path.split('.').pop() ?? path, 'Level must be an object', 'object', level);
+    err(
+      errors,
+      path,
+      path.split('.').pop() ?? path,
+      'Level must be an object',
+      'object',
+      level,
+    );
     return;
   }
 
@@ -522,12 +554,20 @@ function validateLevel(
 
   // generatorConfig
   if (requireObject(errors, level, 'generatorConfig', path)) {
-    validateGeneratorConfig(level.generatorConfig, `${path}.generatorConfig`, errors);
+    validateGeneratorConfig(
+      level.generatorConfig,
+      `${path}.generatorConfig`,
+      errors,
+    );
   }
 
   // starThresholds
   if (requireObject(errors, level, 'starThresholds', path)) {
-    validateStarThresholds(level.starThresholds, `${path}.starThresholds`, errors);
+    validateStarThresholds(
+      level.starThresholds,
+      `${path}.starThresholds`,
+      errors,
+    );
   }
 }
 
@@ -541,7 +581,14 @@ function validateChallengeLevel(
   errors: ValidationError[],
 ): void {
   if (!isObject(cl)) {
-    err(errors, path, 'challengeLevel', 'challengeLevel must be an object', 'object', cl);
+    err(
+      errors,
+      path,
+      'challengeLevel',
+      'challengeLevel must be an object',
+      'object',
+      cl,
+    );
     return;
   }
 
@@ -591,7 +638,7 @@ function validateChallengeLevel(
   // sub-task 7: difficultyWeights sum to 1.0 (±0.001)
   if (requireObject(errors, cl, 'difficultyWeights', path)) {
     const dw = cl.difficultyWeights as Obj;
-    const weightValid = ['easy', 'medium', 'hard'].every((k) => {
+    const weightValid = ['easy', 'medium', 'hard'].every(k => {
       const v = dw[k];
       if (!isNumber(v) || (v as number) < 0 || (v as number) > 1) {
         err(
@@ -619,9 +666,13 @@ function validateChallengeLevel(
           errors,
           `${path}.difficultyWeights`,
           'difficultyWeights',
-          `difficultyWeights.easy + medium + hard must equal 1.0 (±0.001), got ${sum.toFixed(4)}`,
+          `difficultyWeights.easy + medium + hard must equal 1.0 (±0.001), got ${sum.toFixed(
+            4,
+          )}`,
           'easy + medium + hard === 1.0 (±0.001)',
-          `{ easy: ${dw.easy}, medium: ${dw.medium}, hard: ${dw.hard} } (sum: ${sum.toFixed(4)})`,
+          `{ easy: ${dw.easy}, medium: ${dw.medium}, hard: ${
+            dw.hard
+          } } (sum: ${sum.toFixed(4)})`,
         );
       }
     }
@@ -646,7 +697,14 @@ function validateStage(
   errors: ValidationError[],
 ): void {
   if (!isObject(stage)) {
-    err(errors, path, path.split('.').pop() ?? path, 'Stage must be an object', 'object', stage);
+    err(
+      errors,
+      path,
+      path.split('.').pop() ?? path,
+      'Stage must be an object',
+      'object',
+      stage,
+    );
     return;
   }
 
@@ -675,7 +733,9 @@ function validateStage(
             errors,
             `${path}.levels[${i}].order`,
             'order',
-            `Duplicate level order ${ord} in stage — also used at levels[${seenOrders.get(ord)}]`,
+            `Duplicate level order ${ord} in stage — also used at levels[${seenOrders.get(
+              ord,
+            )}]`,
             'unique integer within the stage',
             ord,
           );
@@ -688,7 +748,11 @@ function validateStage(
 
   // challengeLevel (sub-tasks 1, 6, 7, 8)
   if (requireObject(errors, stage, 'challengeLevel', path)) {
-    validateChallengeLevel(stage.challengeLevel, `${path}.challengeLevel`, errors);
+    validateChallengeLevel(
+      stage.challengeLevel,
+      `${path}.challengeLevel`,
+      errors,
+    );
   }
 }
 
@@ -702,7 +766,14 @@ function validateMode(
   errors: ValidationError[],
 ): void {
   if (!isObject(mode)) {
-    err(errors, path, path.split('.').pop() ?? path, 'Mode must be an object', 'object', mode);
+    err(
+      errors,
+      path,
+      path.split('.').pop() ?? path,
+      'Mode must be an object',
+      'object',
+      mode,
+    );
     return;
   }
   requireString(errors, mode, 'id', path);
@@ -730,7 +801,14 @@ function validateCosmetic(
   errors: ValidationError[],
 ): void {
   if (!isObject(cosmetic)) {
-    err(errors, path, path.split('.').pop() ?? path, 'Cosmetic must be an object', 'object', cosmetic);
+    err(
+      errors,
+      path,
+      path.split('.').pop() ?? path,
+      'Cosmetic must be an object',
+      'object',
+      cosmetic,
+    );
     return;
   }
   requireString(errors, cosmetic, 'id', path);
@@ -758,7 +836,9 @@ function validateCosmetic(
         errors,
         `${path}.unlockCondition.type`,
         'type',
-        `unlockCondition.type must be one of: ${[...VALID_UNLOCK_TYPES].join(', ')}`,
+        `unlockCondition.type must be one of: ${[...VALID_UNLOCK_TYPES].join(
+          ', ',
+        )}`,
         [...VALID_UNLOCK_TYPES].join(' | '),
         ucType,
       );
@@ -885,7 +965,7 @@ function checkCircularPrerequisites(
   while (queue.length > 0) {
     const node = queue.shift()!;
     visited++;
-    for (const nb of (adj.get(node) ?? [])) {
+    for (const nb of adj.get(node) ?? []) {
       const newDeg = (inDegree.get(nb) ?? 1) - 1;
       inDegree.set(nb, newDeg);
       if (newDeg === 0) queue.push(nb);
@@ -900,16 +980,16 @@ function checkCircularPrerequisites(
     }
 
     // Report an error for each stage in the cycle
-    cycleNodes.forEach((stageId) => {
-      const stageIndex = stages.findIndex(
-        (s) => isObject(s) && s.id === stageId,
-      );
+    cycleNodes.forEach(stageId => {
+      const stageIndex = stages.findIndex(s => isObject(s) && s.id === stageId);
       const idxStr = stageIndex >= 0 ? `stages[${stageIndex}]` : `stages[?]`;
       err(
         errors,
         `${idxStr}.prerequisiteStageIds`,
         'prerequisiteStageIds',
-        `Stage "${stageId}" is part of a circular prerequisite chain involving: ${cycleNodes.join(', ')}`,
+        `Stage "${stageId}" is part of a circular prerequisite chain involving: ${cycleNodes.join(
+          ', ',
+        )}`,
         'no circular dependency',
         stageId,
       );
@@ -926,13 +1006,14 @@ function checkChallengeCoverage(
     // Collect all question types used across regular levels
     const levelTypes = new Set<string>();
     if (isArray(stage.levels)) {
-      (stage.levels as unknown[]).forEach((level) => {
+      (stage.levels as unknown[]).forEach(level => {
         if (
           isObject(level) &&
           isObject(level.generatorConfig) &&
           isArray((level.generatorConfig as Obj).questionTypes)
         ) {
-          for (const qt of (level.generatorConfig as Obj).questionTypes as unknown[]) {
+          for (const qt of (level.generatorConfig as Obj)
+            .questionTypes as unknown[]) {
             if (typeof qt === 'string') levelTypes.add(qt);
           }
         }
@@ -954,13 +1035,15 @@ function checkChallengeCoverage(
       }
     }
 
-    const uncovered = [...levelTypes].filter((qt) => !challengeTypes.has(qt));
+    const uncovered = [...levelTypes].filter(qt => !challengeTypes.has(qt));
     if (uncovered.length > 0) {
       err(
         errors,
         `stages[${si}].challengeLevel.generatorConfigs`,
         'generatorConfigs',
-        `ChallengeLevel does not cover question type(s) used in the stage's levels: ${uncovered.join(', ')}`,
+        `ChallengeLevel does not cover question type(s) used in the stage's levels: ${uncovered.join(
+          ', ',
+        )}`,
         `all of: ${[...levelTypes].join(', ')}`,
         `covers: ${[...challengeTypes].join(', ') || '(none)'}`,
       );
@@ -1044,9 +1127,9 @@ function validateBundle(bundle: unknown, errors: ValidationError[]): void {
 
   // Cross-field checks (only run if we have parseable data)
   if (stagesValid) {
-    checkModeIdReferences(stages, modeIds, errors);           // sub-task 2
-    checkPrerequisiteReferences(stages, stageById, errors);   // sub-task 3
-    checkCircularPrerequisites(stages, errors);                // sub-task 4
-    checkChallengeCoverage(stages, errors);                   // sub-task 9
+    checkModeIdReferences(stages, modeIds, errors); // sub-task 2
+    checkPrerequisiteReferences(stages, stageById, errors); // sub-task 3
+    checkCircularPrerequisites(stages, errors); // sub-task 4
+    checkChallengeCoverage(stages, errors); // sub-task 9
   }
 }

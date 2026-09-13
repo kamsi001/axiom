@@ -359,7 +359,11 @@
             "difficultyRange": [1, 4]
           },
           {
-            "questionTypes": ["numeric-input", "fill-in-the-blank", "equation-balance"],
+            "questionTypes": [
+              "numeric-input",
+              "fill-in-the-blank",
+              "equation-balance"
+            ],
             "operands": { "min": 1, "max": 15 },
             "allowNegatives": false,
             "allowFractions": false,
@@ -442,7 +446,11 @@
           "questionCount": 10,
           "timeLimit": 120,
           "generatorConfig": {
-            "questionTypes": ["equation-balance", "fill-in-the-blank", "numeric-input"],
+            "questionTypes": [
+              "equation-balance",
+              "fill-in-the-blank",
+              "numeric-input"
+            ],
             "operands": { "min": 1, "max": 30 },
             "allowNegatives": false,
             "allowFractions": false,
@@ -463,7 +471,11 @@
         "retryAllowed": true,
         "generatorConfigs": [
           {
-            "questionTypes": ["equation-balance", "fill-in-the-blank", "numeric-input"],
+            "questionTypes": [
+              "equation-balance",
+              "fill-in-the-blank",
+              "numeric-input"
+            ],
             "operands": { "min": 1, "max": 30 },
             "allowNegatives": false,
             "allowFractions": false,
@@ -567,7 +579,11 @@
         "retryAllowed": true,
         "generatorConfigs": [
           {
-            "questionTypes": ["equation-balance", "fill-in-the-blank", "numeric-input"],
+            "questionTypes": [
+              "equation-balance",
+              "fill-in-the-blank",
+              "numeric-input"
+            ],
             "operands": { "min": 1, "max": 20 },
             "allowNegatives": false,
             "allowFractions": true,
@@ -671,7 +687,11 @@
         "retryAllowed": true,
         "generatorConfigs": [
           {
-            "questionTypes": ["multiple-choice", "numeric-input", "fill-in-the-blank"],
+            "questionTypes": [
+              "multiple-choice",
+              "numeric-input",
+              "fill-in-the-blank"
+            ],
             "operands": { "min": -10, "max": 10 },
             "allowNegatives": true,
             "allowFractions": false,
@@ -775,7 +795,11 @@
         "retryAllowed": true,
         "generatorConfigs": [
           {
-            "questionTypes": ["multiple-choice", "numeric-input", "fill-in-the-blank"],
+            "questionTypes": [
+              "multiple-choice",
+              "numeric-input",
+              "fill-in-the-blank"
+            ],
             "operands": { "min": -10, "max": 10 },
             "allowNegatives": true,
             "allowFractions": false,
