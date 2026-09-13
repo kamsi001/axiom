@@ -1,0 +1,981 @@
+{
+  "contentVersion": 1,
+  "schemaVersion": 1,
+  "modes": [
+    {
+      "id": "arithmetic",
+      "title": "Arithmetic",
+      "description": "Master the four fundamental operations: addition, subtraction, multiplication, and division.",
+      "order": 1,
+      "stageIds": ["arithmetic-addition-01", "arithmetic-multiplication-02"]
+    },
+    {
+      "id": "pre-algebra",
+      "title": "Pre-Algebra",
+      "description": "Build the bridge between arithmetic and algebra by working with variables and simple equations.",
+      "order": 2,
+      "stageIds": ["pre-algebra-variables-01", "pre-algebra-one-step-02"]
+    },
+    {
+      "id": "algebra",
+      "title": "Algebra",
+      "description": "Explore linear equations, graphing, and the relationships between variables.",
+      "order": 3,
+      "stageIds": ["algebra-linear-01", "algebra-graphing-02"]
+    },
+    {
+      "id": "linear-algebra",
+      "title": "Linear Algebra",
+      "description": "Work with vectors, matrices, and the foundations of multi-dimensional mathematics.",
+      "order": 4,
+      "stageIds": ["linear-algebra-vectors-01", "linear-algebra-matrices-02"]
+    }
+  ],
+  "stages": [
+    {
+      "id": "arithmetic-addition-01",
+      "modeId": "arithmetic",
+      "title": "Addition & Subtraction Basics",
+      "description": "Start with single-digit sums, build up to two-digit addition, and tackle subtraction with borrowing.",
+      "order": 1,
+      "prerequisiteStageIds": [],
+      "passingStarThreshold": 6,
+      "levels": [
+        {
+          "id": "arithmetic-addition-01-lv1",
+          "stageId": "arithmetic-addition-01",
+          "order": 1,
+          "title": "Single-Digit Addition",
+          "introduction": {
+            "body": "Addition means combining two numbers to find their total. For example, when you add 3 and 4 you get 7.",
+            "examplePrompt": "What is 3 + 4?",
+            "exampleSolution": "3 + 4 = 7. Count 3 objects, then count 4 more — you have 7 in total."
+          },
+          "hintAllowance": 3,
+          "questionCount": 10,
+          "timeLimit": null,
+          "generatorConfig": {
+            "questionTypes": ["multiple-choice", "numeric-input"],
+            "operands": { "min": 1, "max": 9 },
+            "allowNegatives": false,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": null,
+            "difficultyRange": [1, 3]
+          },
+          "starThresholds": { "oneStar": 50, "twoStar": 70, "threeStar": 90 }
+        },
+        {
+          "id": "arithmetic-addition-01-lv2",
+          "stageId": "arithmetic-addition-01",
+          "order": 2,
+          "title": "Two-Digit Addition",
+          "introduction": {
+            "body": "Now we add two-digit numbers. Remember to line up the ones and tens columns when carrying.",
+            "examplePrompt": "What is 23 + 48?",
+            "exampleSolution": "3 + 8 = 11, write 1 carry 1. 2 + 4 + 1 = 7. Answer: 71."
+          },
+          "hintAllowance": 3,
+          "questionCount": 10,
+          "timeLimit": null,
+          "generatorConfig": {
+            "questionTypes": ["numeric-input", "fill-in-the-blank"],
+            "operands": { "min": 10, "max": 99 },
+            "allowNegatives": false,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": null,
+            "difficultyRange": [3, 6]
+          },
+          "starThresholds": { "oneStar": 50, "twoStar": 70, "threeStar": 90 }
+        },
+        {
+          "id": "arithmetic-addition-01-lv3",
+          "stageId": "arithmetic-addition-01",
+          "order": 3,
+          "title": "Subtraction with Borrowing",
+          "introduction": {
+            "body": "When the top digit is smaller than the bottom digit, borrow 10 from the column to the left.",
+            "examplePrompt": "What is 52 - 37?",
+            "exampleSolution": "Borrow 10: 12 - 7 = 5. 4 - 3 = 1. Answer: 15."
+          },
+          "hintAllowance": 3,
+          "questionCount": 10,
+          "timeLimit": 120,
+          "generatorConfig": {
+            "questionTypes": ["numeric-input", "fill-in-the-blank"],
+            "operands": { "min": 10, "max": 99 },
+            "allowNegatives": false,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": null,
+            "difficultyRange": [5, 8]
+          },
+          "starThresholds": { "oneStar": 50, "twoStar": 70, "threeStar": 90 }
+        }
+      ],
+      "challengeLevel": {
+        "id": "arithmetic-addition-01-challenge",
+        "stageId": "arithmetic-addition-01",
+        "title": "Addition & Subtraction Challenge",
+        "questionCount": 15,
+        "timeLimit": null,
+        "passingAccuracy": 0.7,
+        "retryAllowed": true,
+        "generatorConfigs": [
+          {
+            "questionTypes": ["multiple-choice", "numeric-input"],
+            "operands": { "min": 1, "max": 99 },
+            "allowNegatives": false,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": null,
+            "difficultyRange": [1, 6]
+          },
+          {
+            "questionTypes": ["fill-in-the-blank"],
+            "operands": { "min": 10, "max": 99 },
+            "allowNegatives": false,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": null,
+            "difficultyRange": [3, 8]
+          }
+        ],
+        "difficultyWeights": { "easy": 0.2, "medium": 0.3, "hard": 0.5 }
+      }
+    },
+    {
+      "id": "arithmetic-multiplication-02",
+      "modeId": "arithmetic",
+      "title": "Multiplication & Division Basics",
+      "description": "Learn your times tables and discover how division is the inverse of multiplication.",
+      "order": 2,
+      "prerequisiteStageIds": ["arithmetic-addition-01"],
+      "passingStarThreshold": 6,
+      "levels": [
+        {
+          "id": "arithmetic-multiplication-02-lv1",
+          "stageId": "arithmetic-multiplication-02",
+          "order": 1,
+          "title": "Times Tables 1–5",
+          "introduction": {
+            "body": "Multiplication is repeated addition. 3 × 4 means adding 3 four times: 3 + 3 + 3 + 3 = 12.",
+            "examplePrompt": "What is 3 × 4?",
+            "exampleSolution": "3 × 4 = 12. Think of it as 3 added 4 times: 3 + 3 + 3 + 3 = 12."
+          },
+          "hintAllowance": 3,
+          "questionCount": 10,
+          "timeLimit": null,
+          "generatorConfig": {
+            "questionTypes": ["multiple-choice", "tile-selection"],
+            "operands": { "min": 1, "max": 5 },
+            "allowNegatives": false,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": null,
+            "difficultyRange": [1, 3]
+          },
+          "starThresholds": { "oneStar": 50, "twoStar": 70, "threeStar": 90 }
+        },
+        {
+          "id": "arithmetic-multiplication-02-lv2",
+          "stageId": "arithmetic-multiplication-02",
+          "order": 2,
+          "title": "Times Tables 6–10",
+          "introduction": {
+            "body": "Extend your multiplication knowledge to the larger times tables. Patterns and tricks can help you remember them.",
+            "examplePrompt": "What is 7 × 8?",
+            "exampleSolution": "7 × 8 = 56. A memory trick: 5, 6, 7, 8 — 56 = 7 × 8."
+          },
+          "hintAllowance": 3,
+          "questionCount": 10,
+          "timeLimit": null,
+          "generatorConfig": {
+            "questionTypes": ["multiple-choice", "numeric-input"],
+            "operands": { "min": 6, "max": 10 },
+            "allowNegatives": false,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": null,
+            "difficultyRange": [3, 6]
+          },
+          "starThresholds": { "oneStar": 50, "twoStar": 70, "threeStar": 90 }
+        },
+        {
+          "id": "arithmetic-multiplication-02-lv3",
+          "stageId": "arithmetic-multiplication-02",
+          "order": 3,
+          "title": "Division as Inverse Multiplication",
+          "introduction": {
+            "body": "Division is the opposite of multiplication. If 3 × 4 = 12, then 12 ÷ 4 = 3.",
+            "examplePrompt": "What is 24 ÷ 6?",
+            "exampleSolution": "Ask: what number times 6 equals 24? Answer: 4. So 24 ÷ 6 = 4."
+          },
+          "hintAllowance": 3,
+          "questionCount": 10,
+          "timeLimit": 120,
+          "generatorConfig": {
+            "questionTypes": ["numeric-input", "fill-in-the-blank"],
+            "operands": { "min": 1, "max": 10 },
+            "allowNegatives": false,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": null,
+            "difficultyRange": [5, 8]
+          },
+          "starThresholds": { "oneStar": 50, "twoStar": 70, "threeStar": 90 }
+        }
+      ],
+      "challengeLevel": {
+        "id": "arithmetic-multiplication-02-challenge",
+        "stageId": "arithmetic-multiplication-02",
+        "title": "Multiplication & Division Challenge",
+        "questionCount": 15,
+        "timeLimit": null,
+        "passingAccuracy": 0.7,
+        "retryAllowed": true,
+        "generatorConfigs": [
+          {
+            "questionTypes": ["multiple-choice", "tile-selection"],
+            "operands": { "min": 1, "max": 10 },
+            "allowNegatives": false,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": null,
+            "difficultyRange": [1, 4]
+          },
+          {
+            "questionTypes": ["numeric-input", "fill-in-the-blank"],
+            "operands": { "min": 1, "max": 10 },
+            "allowNegatives": false,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": null,
+            "difficultyRange": [3, 8]
+          }
+        ],
+        "difficultyWeights": { "easy": 0.2, "medium": 0.3, "hard": 0.5 }
+      }
+    },
+    {
+      "id": "pre-algebra-variables-01",
+      "modeId": "pre-algebra",
+      "title": "Introduction to Variables",
+      "description": "Discover what variables are and how to evaluate and write algebraic expressions.",
+      "order": 1,
+      "prerequisiteStageIds": [],
+      "passingStarThreshold": 6,
+      "levels": [
+        {
+          "id": "pre-algebra-variables-01-lv1",
+          "stageId": "pre-algebra-variables-01",
+          "order": 1,
+          "title": "What Is a Variable?",
+          "introduction": {
+            "body": "A variable is a letter (like x or n) that stands in for an unknown number. Variables let us write general rules.",
+            "examplePrompt": "If x = 5, what is x + 3?",
+            "exampleSolution": "Replace x with 5: 5 + 3 = 8."
+          },
+          "hintAllowance": 3,
+          "questionCount": 10,
+          "timeLimit": null,
+          "generatorConfig": {
+            "questionTypes": ["multiple-choice", "tile-selection"],
+            "operands": { "min": 1, "max": 10 },
+            "allowNegatives": false,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": 1,
+            "difficultyRange": [1, 3]
+          },
+          "starThresholds": { "oneStar": 50, "twoStar": 70, "threeStar": 90 }
+        },
+        {
+          "id": "pre-algebra-variables-01-lv2",
+          "stageId": "pre-algebra-variables-01",
+          "order": 2,
+          "title": "Evaluating Expressions",
+          "introduction": {
+            "body": "To evaluate an expression, substitute the given value for each variable and compute the result.",
+            "examplePrompt": "Evaluate 3x + 2 when x = 4.",
+            "exampleSolution": "Replace x with 4: 3(4) + 2 = 12 + 2 = 14."
+          },
+          "hintAllowance": 3,
+          "questionCount": 10,
+          "timeLimit": null,
+          "generatorConfig": {
+            "questionTypes": ["numeric-input", "fill-in-the-blank"],
+            "operands": { "min": 1, "max": 12 },
+            "allowNegatives": false,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": 1,
+            "difficultyRange": [3, 6]
+          },
+          "starThresholds": { "oneStar": 50, "twoStar": 70, "threeStar": 90 }
+        },
+        {
+          "id": "pre-algebra-variables-01-lv3",
+          "stageId": "pre-algebra-variables-01",
+          "order": 3,
+          "title": "Writing Expressions",
+          "introduction": {
+            "body": "Turn word descriptions into algebraic expressions using variables and operations.",
+            "examplePrompt": "Write an expression for 'five more than a number n'.",
+            "exampleSolution": "n + 5"
+          },
+          "hintAllowance": 3,
+          "questionCount": 10,
+          "timeLimit": 120,
+          "generatorConfig": {
+            "questionTypes": ["fill-in-the-blank", "equation-balance"],
+            "operands": { "min": 1, "max": 15 },
+            "allowNegatives": false,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": 1,
+            "difficultyRange": [5, 8]
+          },
+          "starThresholds": { "oneStar": 50, "twoStar": 70, "threeStar": 90 }
+        }
+      ],
+      "challengeLevel": {
+        "id": "pre-algebra-variables-01-challenge",
+        "stageId": "pre-algebra-variables-01",
+        "title": "Variables Challenge",
+        "questionCount": 15,
+        "timeLimit": null,
+        "passingAccuracy": 0.7,
+        "retryAllowed": true,
+        "generatorConfigs": [
+          {
+            "questionTypes": ["multiple-choice", "tile-selection"],
+            "operands": { "min": 1, "max": 12 },
+            "allowNegatives": false,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": 1,
+            "difficultyRange": [1, 4]
+          },
+          {
+            "questionTypes": ["numeric-input", "fill-in-the-blank", "equation-balance"],
+            "operands": { "min": 1, "max": 15 },
+            "allowNegatives": false,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": 1,
+            "difficultyRange": [3, 8]
+          }
+        ],
+        "difficultyWeights": { "easy": 0.2, "medium": 0.3, "hard": 0.5 }
+      }
+    },
+    {
+      "id": "pre-algebra-one-step-02",
+      "modeId": "pre-algebra",
+      "title": "Solving One-Step Equations",
+      "description": "Use inverse operations to isolate a variable and solve equations in a single step.",
+      "order": 2,
+      "prerequisiteStageIds": ["pre-algebra-variables-01"],
+      "passingStarThreshold": 6,
+      "levels": [
+        {
+          "id": "pre-algebra-one-step-02-lv1",
+          "stageId": "pre-algebra-one-step-02",
+          "order": 1,
+          "title": "Solving by Addition & Subtraction",
+          "introduction": {
+            "body": "To solve x + 4 = 9, subtract 4 from both sides: x = 9 - 4 = 5. The goal is to get the variable alone.",
+            "examplePrompt": "Solve: x + 6 = 10",
+            "exampleSolution": "Subtract 6 from both sides: x = 10 - 6 = 4."
+          },
+          "hintAllowance": 3,
+          "questionCount": 10,
+          "timeLimit": null,
+          "generatorConfig": {
+            "questionTypes": ["equation-balance", "fill-in-the-blank"],
+            "operands": { "min": 1, "max": 20 },
+            "allowNegatives": false,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": 1,
+            "difficultyRange": [1, 3]
+          },
+          "starThresholds": { "oneStar": 50, "twoStar": 70, "threeStar": 90 }
+        },
+        {
+          "id": "pre-algebra-one-step-02-lv2",
+          "stageId": "pre-algebra-one-step-02",
+          "order": 2,
+          "title": "Solving by Multiplication & Division",
+          "introduction": {
+            "body": "To solve 3x = 12, divide both sides by 3: x = 4. To solve x/4 = 5, multiply both sides by 4: x = 20.",
+            "examplePrompt": "Solve: 4x = 28",
+            "exampleSolution": "Divide both sides by 4: x = 28 ÷ 4 = 7."
+          },
+          "hintAllowance": 3,
+          "questionCount": 10,
+          "timeLimit": null,
+          "generatorConfig": {
+            "questionTypes": ["equation-balance", "numeric-input"],
+            "operands": { "min": 1, "max": 20 },
+            "allowNegatives": false,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": 1,
+            "difficultyRange": [3, 6]
+          },
+          "starThresholds": { "oneStar": 50, "twoStar": 70, "threeStar": 90 }
+        },
+        {
+          "id": "pre-algebra-one-step-02-lv3",
+          "stageId": "pre-algebra-one-step-02",
+          "order": 3,
+          "title": "Mixed Operations",
+          "introduction": {
+            "body": "Identify the operation on the variable, then apply the inverse to both sides to solve.",
+            "examplePrompt": "Solve: x - 9 = 3",
+            "exampleSolution": "Add 9 to both sides: x = 3 + 9 = 12."
+          },
+          "hintAllowance": 3,
+          "questionCount": 10,
+          "timeLimit": 120,
+          "generatorConfig": {
+            "questionTypes": ["equation-balance", "fill-in-the-blank", "numeric-input"],
+            "operands": { "min": 1, "max": 30 },
+            "allowNegatives": false,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": 1,
+            "difficultyRange": [5, 8]
+          },
+          "starThresholds": { "oneStar": 50, "twoStar": 70, "threeStar": 90 }
+        }
+      ],
+      "challengeLevel": {
+        "id": "pre-algebra-one-step-02-challenge",
+        "stageId": "pre-algebra-one-step-02",
+        "title": "One-Step Equations Challenge",
+        "questionCount": 15,
+        "timeLimit": null,
+        "passingAccuracy": 0.7,
+        "retryAllowed": true,
+        "generatorConfigs": [
+          {
+            "questionTypes": ["equation-balance", "fill-in-the-blank", "numeric-input"],
+            "operands": { "min": 1, "max": 30 },
+            "allowNegatives": false,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": 1,
+            "difficultyRange": [1, 8]
+          }
+        ],
+        "difficultyWeights": { "easy": 0.2, "medium": 0.3, "hard": 0.5 }
+      }
+    },
+    {
+      "id": "algebra-linear-01",
+      "modeId": "algebra",
+      "title": "Linear Equations",
+      "description": "Solve multi-step linear equations, including those with variables on both sides and fractions.",
+      "order": 1,
+      "prerequisiteStageIds": [],
+      "passingStarThreshold": 6,
+      "levels": [
+        {
+          "id": "algebra-linear-01-lv1",
+          "stageId": "algebra-linear-01",
+          "order": 1,
+          "title": "Two-Step Equations",
+          "introduction": {
+            "body": "A two-step equation requires two inverse operations to isolate the variable. Undo addition/subtraction first, then multiplication/division.",
+            "examplePrompt": "Solve: 2x + 3 = 11",
+            "exampleSolution": "Subtract 3: 2x = 8. Divide by 2: x = 4."
+          },
+          "hintAllowance": 3,
+          "questionCount": 10,
+          "timeLimit": null,
+          "generatorConfig": {
+            "questionTypes": ["equation-balance", "fill-in-the-blank"],
+            "operands": { "min": 1, "max": 20 },
+            "allowNegatives": false,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": 1,
+            "difficultyRange": [1, 3]
+          },
+          "starThresholds": { "oneStar": 50, "twoStar": 70, "threeStar": 90 }
+        },
+        {
+          "id": "algebra-linear-01-lv2",
+          "stageId": "algebra-linear-01",
+          "order": 2,
+          "title": "Variables on Both Sides",
+          "introduction": {
+            "body": "Collect all variable terms on one side by adding or subtracting from both sides before solving.",
+            "examplePrompt": "Solve: 3x + 5 = x + 13",
+            "exampleSolution": "Subtract x: 2x + 5 = 13. Subtract 5: 2x = 8. Divide by 2: x = 4."
+          },
+          "hintAllowance": 3,
+          "questionCount": 10,
+          "timeLimit": null,
+          "generatorConfig": {
+            "questionTypes": ["equation-balance", "numeric-input"],
+            "operands": { "min": 1, "max": 20 },
+            "allowNegatives": false,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": 1,
+            "difficultyRange": [3, 6]
+          },
+          "starThresholds": { "oneStar": 50, "twoStar": 70, "threeStar": 90 }
+        },
+        {
+          "id": "algebra-linear-01-lv3",
+          "stageId": "algebra-linear-01",
+          "order": 3,
+          "title": "Equations with Fractions",
+          "introduction": {
+            "body": "Multiply both sides by the least common denominator to clear fractions, then solve normally.",
+            "examplePrompt": "Solve: x/2 + 3 = 7",
+            "exampleSolution": "Subtract 3: x/2 = 4. Multiply by 2: x = 8."
+          },
+          "hintAllowance": 3,
+          "questionCount": 10,
+          "timeLimit": 120,
+          "generatorConfig": {
+            "questionTypes": ["numeric-input", "fill-in-the-blank"],
+            "operands": { "min": 1, "max": 20 },
+            "allowNegatives": false,
+            "allowFractions": true,
+            "allowDecimals": false,
+            "variableCount": 1,
+            "difficultyRange": [5, 8]
+          },
+          "starThresholds": { "oneStar": 50, "twoStar": 70, "threeStar": 90 }
+        }
+      ],
+      "challengeLevel": {
+        "id": "algebra-linear-01-challenge",
+        "stageId": "algebra-linear-01",
+        "title": "Linear Equations Challenge",
+        "questionCount": 15,
+        "timeLimit": null,
+        "passingAccuracy": 0.7,
+        "retryAllowed": true,
+        "generatorConfigs": [
+          {
+            "questionTypes": ["equation-balance", "fill-in-the-blank", "numeric-input"],
+            "operands": { "min": 1, "max": 20 },
+            "allowNegatives": false,
+            "allowFractions": true,
+            "allowDecimals": false,
+            "variableCount": 1,
+            "difficultyRange": [1, 8]
+          }
+        ],
+        "difficultyWeights": { "easy": 0.2, "medium": 0.3, "hard": 0.5 }
+      }
+    },
+    {
+      "id": "algebra-graphing-02",
+      "modeId": "algebra",
+      "title": "Graphing & Slope",
+      "description": "Learn to calculate slope from two points and write equations in slope-intercept form.",
+      "order": 2,
+      "prerequisiteStageIds": ["algebra-linear-01"],
+      "passingStarThreshold": 6,
+      "levels": [
+        {
+          "id": "algebra-graphing-02-lv1",
+          "stageId": "algebra-graphing-02",
+          "order": 1,
+          "title": "Slope from Two Points",
+          "introduction": {
+            "body": "Slope = (y₂ - y₁) / (x₂ - x₁). It measures how steep a line is.",
+            "examplePrompt": "Find the slope of the line through (1, 2) and (3, 6).",
+            "exampleSolution": "slope = (6 - 2) / (3 - 1) = 4 / 2 = 2."
+          },
+          "hintAllowance": 3,
+          "questionCount": 10,
+          "timeLimit": null,
+          "generatorConfig": {
+            "questionTypes": ["multiple-choice", "numeric-input"],
+            "operands": { "min": -10, "max": 10 },
+            "allowNegatives": true,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": null,
+            "difficultyRange": [1, 3]
+          },
+          "starThresholds": { "oneStar": 50, "twoStar": 70, "threeStar": 90 }
+        },
+        {
+          "id": "algebra-graphing-02-lv2",
+          "stageId": "algebra-graphing-02",
+          "order": 2,
+          "title": "Slope-Intercept Form",
+          "introduction": {
+            "body": "The slope-intercept form is y = mx + b, where m is the slope and b is the y-intercept.",
+            "examplePrompt": "Identify the slope and y-intercept of y = 3x - 2.",
+            "exampleSolution": "Slope m = 3, y-intercept b = -2."
+          },
+          "hintAllowance": 3,
+          "questionCount": 10,
+          "timeLimit": null,
+          "generatorConfig": {
+            "questionTypes": ["fill-in-the-blank", "multiple-choice"],
+            "operands": { "min": -10, "max": 10 },
+            "allowNegatives": true,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": 1,
+            "difficultyRange": [3, 6]
+          },
+          "starThresholds": { "oneStar": 50, "twoStar": 70, "threeStar": 90 }
+        },
+        {
+          "id": "algebra-graphing-02-lv3",
+          "stageId": "algebra-graphing-02",
+          "order": 3,
+          "title": "Writing Linear Equations",
+          "introduction": {
+            "body": "Given a slope and a point, substitute into y = mx + b to find b, then write the full equation.",
+            "examplePrompt": "Write the equation of a line with slope 2 passing through (1, 5).",
+            "exampleSolution": "5 = 2(1) + b → b = 3. Equation: y = 2x + 3."
+          },
+          "hintAllowance": 3,
+          "questionCount": 10,
+          "timeLimit": 120,
+          "generatorConfig": {
+            "questionTypes": ["fill-in-the-blank", "numeric-input"],
+            "operands": { "min": -10, "max": 10 },
+            "allowNegatives": true,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": 1,
+            "difficultyRange": [5, 8]
+          },
+          "starThresholds": { "oneStar": 50, "twoStar": 70, "threeStar": 90 }
+        }
+      ],
+      "challengeLevel": {
+        "id": "algebra-graphing-02-challenge",
+        "stageId": "algebra-graphing-02",
+        "title": "Graphing & Slope Challenge",
+        "questionCount": 15,
+        "timeLimit": null,
+        "passingAccuracy": 0.7,
+        "retryAllowed": true,
+        "generatorConfigs": [
+          {
+            "questionTypes": ["multiple-choice", "numeric-input", "fill-in-the-blank"],
+            "operands": { "min": -10, "max": 10 },
+            "allowNegatives": true,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": 1,
+            "difficultyRange": [1, 8]
+          }
+        ],
+        "difficultyWeights": { "easy": 0.2, "medium": 0.3, "hard": 0.5 }
+      }
+    },
+    {
+      "id": "linear-algebra-vectors-01",
+      "modeId": "linear-algebra",
+      "title": "Vectors & Scalars",
+      "description": "Understand vector components, scalar multiplication, and vector addition in two dimensions.",
+      "order": 1,
+      "prerequisiteStageIds": [],
+      "passingStarThreshold": 6,
+      "levels": [
+        {
+          "id": "linear-algebra-vectors-01-lv1",
+          "stageId": "linear-algebra-vectors-01",
+          "order": 1,
+          "title": "Vector Components",
+          "introduction": {
+            "body": "A vector has both magnitude (size) and direction. In 2D it is written as (x, y) where x and y are its components.",
+            "examplePrompt": "What are the components of the vector from point (1, 2) to point (4, 6)?",
+            "exampleSolution": "Subtract: (4-1, 6-2) = (3, 4)."
+          },
+          "hintAllowance": 3,
+          "questionCount": 10,
+          "timeLimit": null,
+          "generatorConfig": {
+            "questionTypes": ["multiple-choice", "numeric-input"],
+            "operands": { "min": -10, "max": 10 },
+            "allowNegatives": true,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": null,
+            "difficultyRange": [1, 3]
+          },
+          "starThresholds": { "oneStar": 50, "twoStar": 70, "threeStar": 90 }
+        },
+        {
+          "id": "linear-algebra-vectors-01-lv2",
+          "stageId": "linear-algebra-vectors-01",
+          "order": 2,
+          "title": "Scalar Multiplication",
+          "introduction": {
+            "body": "Multiplying a vector by a scalar stretches or shrinks it. 2 × (3, 4) = (6, 8).",
+            "examplePrompt": "Multiply: 3 × (2, -1)",
+            "exampleSolution": "Multiply each component by 3: (6, -3)."
+          },
+          "hintAllowance": 3,
+          "questionCount": 10,
+          "timeLimit": null,
+          "generatorConfig": {
+            "questionTypes": ["numeric-input", "fill-in-the-blank"],
+            "operands": { "min": -5, "max": 5 },
+            "allowNegatives": true,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": null,
+            "difficultyRange": [3, 6]
+          },
+          "starThresholds": { "oneStar": 50, "twoStar": 70, "threeStar": 90 }
+        },
+        {
+          "id": "linear-algebra-vectors-01-lv3",
+          "stageId": "linear-algebra-vectors-01",
+          "order": 3,
+          "title": "Vector Addition",
+          "introduction": {
+            "body": "Add vectors component-by-component: (a, b) + (c, d) = (a+c, b+d).",
+            "examplePrompt": "Add: (2, 3) + (5, -1)",
+            "exampleSolution": "(2+5, 3+(-1)) = (7, 2)."
+          },
+          "hintAllowance": 3,
+          "questionCount": 10,
+          "timeLimit": 120,
+          "generatorConfig": {
+            "questionTypes": ["numeric-input", "drag-and-drop"],
+            "operands": { "min": -10, "max": 10 },
+            "allowNegatives": true,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": null,
+            "difficultyRange": [5, 8]
+          },
+          "starThresholds": { "oneStar": 50, "twoStar": 70, "threeStar": 90 }
+        }
+      ],
+      "challengeLevel": {
+        "id": "linear-algebra-vectors-01-challenge",
+        "stageId": "linear-algebra-vectors-01",
+        "title": "Vectors & Scalars Challenge",
+        "questionCount": 15,
+        "timeLimit": null,
+        "passingAccuracy": 0.7,
+        "retryAllowed": true,
+        "generatorConfigs": [
+          {
+            "questionTypes": ["multiple-choice", "numeric-input", "fill-in-the-blank"],
+            "operands": { "min": -10, "max": 10 },
+            "allowNegatives": true,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": null,
+            "difficultyRange": [1, 6]
+          },
+          {
+            "questionTypes": ["drag-and-drop"],
+            "operands": { "min": -10, "max": 10 },
+            "allowNegatives": true,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": null,
+            "difficultyRange": [5, 8]
+          }
+        ],
+        "difficultyWeights": { "easy": 0.2, "medium": 0.3, "hard": 0.5 }
+      }
+    },
+    {
+      "id": "linear-algebra-matrices-02",
+      "modeId": "linear-algebra",
+      "title": "Matrices Introduction",
+      "description": "Learn to read, add, subtract, and scalar-multiply matrices.",
+      "order": 2,
+      "prerequisiteStageIds": ["linear-algebra-vectors-01"],
+      "passingStarThreshold": 6,
+      "levels": [
+        {
+          "id": "linear-algebra-matrices-02-lv1",
+          "stageId": "linear-algebra-matrices-02",
+          "order": 1,
+          "title": "Reading Matrices",
+          "introduction": {
+            "body": "A matrix is a rectangular array of numbers arranged in rows and columns. The element in row i and column j is written a_ij.",
+            "examplePrompt": "In the matrix [[1,2],[3,4]], what is the element at row 2, column 1?",
+            "exampleSolution": "Row 2, column 1 → a_21 = 3."
+          },
+          "hintAllowance": 3,
+          "questionCount": 10,
+          "timeLimit": null,
+          "generatorConfig": {
+            "questionTypes": ["multiple-choice", "tile-selection"],
+            "operands": { "min": -9, "max": 9 },
+            "allowNegatives": true,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": null,
+            "difficultyRange": [1, 3]
+          },
+          "starThresholds": { "oneStar": 50, "twoStar": 70, "threeStar": 90 }
+        },
+        {
+          "id": "linear-algebra-matrices-02-lv2",
+          "stageId": "linear-algebra-matrices-02",
+          "order": 2,
+          "title": "Matrix Addition & Subtraction",
+          "introduction": {
+            "body": "Add or subtract matrices by combining corresponding elements. Matrices must have the same dimensions.",
+            "examplePrompt": "Add [[1,2],[3,4]] + [[5,6],[7,8]]",
+            "exampleSolution": "[[1+5, 2+6],[3+7, 4+8]] = [[6,8],[10,12]]."
+          },
+          "hintAllowance": 3,
+          "questionCount": 10,
+          "timeLimit": null,
+          "generatorConfig": {
+            "questionTypes": ["numeric-input", "fill-in-the-blank"],
+            "operands": { "min": -9, "max": 9 },
+            "allowNegatives": true,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": null,
+            "difficultyRange": [3, 6]
+          },
+          "starThresholds": { "oneStar": 50, "twoStar": 70, "threeStar": 90 }
+        },
+        {
+          "id": "linear-algebra-matrices-02-lv3",
+          "stageId": "linear-algebra-matrices-02",
+          "order": 3,
+          "title": "Scalar Multiplication of Matrices",
+          "introduction": {
+            "body": "Multiply every element of a matrix by the scalar: k × [[a,b],[c,d]] = [[ka,kb],[kc,kd]].",
+            "examplePrompt": "Compute 3 × [[1,2],[3,4]]",
+            "exampleSolution": "[[3,6],[9,12]]."
+          },
+          "hintAllowance": 3,
+          "questionCount": 10,
+          "timeLimit": 120,
+          "generatorConfig": {
+            "questionTypes": ["numeric-input", "fill-in-the-blank"],
+            "operands": { "min": -9, "max": 9 },
+            "allowNegatives": true,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": null,
+            "difficultyRange": [5, 8]
+          },
+          "starThresholds": { "oneStar": 50, "twoStar": 70, "threeStar": 90 }
+        }
+      ],
+      "challengeLevel": {
+        "id": "linear-algebra-matrices-02-challenge",
+        "stageId": "linear-algebra-matrices-02",
+        "title": "Matrices Challenge",
+        "questionCount": 15,
+        "timeLimit": null,
+        "passingAccuracy": 0.7,
+        "retryAllowed": true,
+        "generatorConfigs": [
+          {
+            "questionTypes": ["multiple-choice", "tile-selection"],
+            "operands": { "min": -9, "max": 9 },
+            "allowNegatives": true,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": null,
+            "difficultyRange": [1, 4]
+          },
+          {
+            "questionTypes": ["numeric-input", "fill-in-the-blank"],
+            "operands": { "min": -9, "max": 9 },
+            "allowNegatives": true,
+            "allowFractions": false,
+            "allowDecimals": false,
+            "variableCount": null,
+            "difficultyRange": [3, 8]
+          }
+        ],
+        "difficultyWeights": { "easy": 0.2, "medium": 0.3, "hard": 0.5 }
+      }
+    }
+  ],
+  "cosmetics": [
+    {
+      "id": "cosmetic-first-steps",
+      "type": "avatar",
+      "name": "First Steps",
+      "description": "Awarded for completing your first stage. The journey of a thousand miles begins with a single step.",
+      "unlockCondition": {
+        "type": "stage-complete",
+        "value": "arithmetic-addition-01"
+      },
+      "assetRef": "avatars/first-steps.png"
+    },
+    {
+      "id": "cosmetic-century-club",
+      "type": "badge",
+      "name": "Century Club",
+      "description": "Earned by accumulating 100 XP. You're just getting started!",
+      "unlockCondition": {
+        "type": "xp-threshold",
+        "value": 100
+      },
+      "assetRef": "badges/century-club.png"
+    },
+    {
+      "id": "cosmetic-streak-3",
+      "type": "badge",
+      "name": "Hot Streak",
+      "description": "Keep your daily practice going for 3 days in a row to earn this badge.",
+      "unlockCondition": {
+        "type": "streak",
+        "value": 3
+      },
+      "assetRef": "badges/hot-streak.png"
+    },
+    {
+      "id": "cosmetic-perfect-start",
+      "type": "frame",
+      "name": "Perfect Start",
+      "description": "Achieve a perfect score on the very first level. A great beginning!",
+      "unlockCondition": {
+        "type": "perfect-level",
+        "value": "arithmetic-addition-01-lv1"
+      },
+      "assetRef": "frames/perfect-start.png"
+    },
+    {
+      "id": "cosmetic-dark-theme",
+      "type": "theme",
+      "name": "Dark Scholar",
+      "description": "Unlock the sleek dark colour scheme by reaching 500 XP.",
+      "unlockCondition": {
+        "type": "xp-threshold",
+        "value": 500
+      },
+      "assetRef": "themes/dark-scholar"
+    },
+    {
+      "id": "cosmetic-algebra-master",
+      "type": "badge",
+      "name": "Algebra Master",
+      "description": "Complete the Linear Equations stage to prove your algebra skills.",
+      "unlockCondition": {
+        "type": "stage-complete",
+        "value": "algebra-linear-01"
+      },
+      "assetRef": "badges/algebra-master.png"
+    }
+  ]
+}
