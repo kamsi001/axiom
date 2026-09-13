@@ -11,7 +11,7 @@
  * ContentValidator, not by this schema.
  */
 
-// eslint-disable-next-line @typescript-eslint/no-require-imports
+ 
 const contentSchema: object = require('./content.schema.json') as object;
 
 export { contentSchema };

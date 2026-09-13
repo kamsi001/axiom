@@ -5,10 +5,7 @@
  * cases from the testing strategy in design.md (Content Schema Validation section).
  */
 
-import {
-  validateContentBundle,
-  ValidationResult,
-} from '../src/services/ContentValidator';
+import { validateContentBundle } from '../src/services/ContentValidator';
 
 // ---------------------------------------------------------------------------
 // Minimal valid bundle helpers
@@ -98,14 +95,6 @@ function makeValidBundle(): Record<string, unknown> {
     stages: [makeValidStage()],
     cosmetics: [makeValidCosmetic()],
   };
-}
-
-// ---------------------------------------------------------------------------
-// Helper to deep-clone the bundle to avoid test pollution
-// ---------------------------------------------------------------------------
-
-function cloneBundle(bundle: Record<string, unknown>): Record<string, unknown> {
-  return JSON.parse(JSON.stringify(bundle));
 }
 
 // ---------------------------------------------------------------------------
